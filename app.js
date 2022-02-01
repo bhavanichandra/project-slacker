@@ -7,7 +7,7 @@ if (env_config.error) {
 } else {
 	const { App } = require('@slack/bolt');
 	const sequelize = require('./utility/sequelize');
-	const Application = require('./models/applications');
+	const Application = require('./models/application');
 	const ConnectedApp = require('./models/connected-app');
 	const ApplicationSetting = require('./models/application-setting');
 	const User = require('./models/user');
