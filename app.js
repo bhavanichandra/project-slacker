@@ -11,6 +11,8 @@ if (env_config.error) {
 	const ConnectedApp = require('./models/connected-app');
 	const ApplicationSetting = require('./models/application-setting');
 	const User = require('./models/user');
+	const { eventAppHomeOpened } = require('./listeners/event-listener');
+
 	const app = new App({
 		appToken: process.env.SLACK_APP_TOKEN,
 		token: process.env.SLACK_BOT_TOKEN,
@@ -18,10 +20,11 @@ if (env_config.error) {
 		port: process.env.PORT || 8080,
 		socketMode: true
 	});
-
 	User.hasMany(ConnectedApp, { foreignKey: 'userId' });
 	Application.hasMany(ConnectedApp, { foreignKey: 'applicationId' });
 	Application.hasMany(ApplicationSetting, { foreignKey: 'applicationId' });
+
+	app.event('app_home_opened', eventAppHomeOpened);
 	// sequelize.sync();
 	sequelize
 		.authenticate()

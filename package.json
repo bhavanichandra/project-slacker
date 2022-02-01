@@ -16,12 +16,14 @@
     "jsforce": "^1.11.0",
     "pg": "^8.7.1",
     "pg-hstore": "^2.3.4",
+    "pluralize": "^8.0.0",
     "sequelize": "^6.15.0",
     "slack-block-builder": "^2.4.2"
   },
   "devDependencies": {
     "@types/jsforce": "^1.9.39",
     "@types/sequelize": "^4.28.11",
+    "eslint": "^8.8.0",
     "nodemon": "^2.0.15"
   },
   "volta": {
