@@ -21,6 +21,9 @@ const ConnectedApp = sequelize.define('connected_app', {
 	},
 	userId: {
 		type: DataTypes.INTEGER
+	},
+	isConnected: {
+		type: DataTypes.BOOLEAN
 	}
 });
 

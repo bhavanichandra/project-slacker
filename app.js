@@ -11,7 +11,15 @@ if (env_config.error) {
 	const ConnectedApp = require('./models/connected-app');
 	const ApplicationSetting = require('./models/application-setting');
 	const User = require('./models/user');
-	const { eventAppHomeOpened } = require('./listeners/event-listener');
+	const {
+		onAppHomeOpened,
+		onViewSubmission
+	} = require('./listeners/event-listener');
+	const {
+		createConnectedAppAction,
+		appLoginAction
+	} = require('./listeners/action-listener');
+	const constants = require('./utility/constants');
 
 	const app = new App({
 		appToken: process.env.SLACK_APP_TOKEN,
@@ -24,7 +32,14 @@ if (env_config.error) {
 	Application.hasMany(ConnectedApp, { foreignKey: 'applicationId' });
 	Application.hasMany(ApplicationSetting, { foreignKey: 'applicationId' });
 
-	app.event('app_home_opened', eventAppHomeOpened);
+	app.event('app_home_opened', onAppHomeOpened);
+
+	app.view(constants.createConnectedAppCallback, onViewSubmission);
+
+	app.action(constants.createConnectedAppView, createConnectedAppAction);
+
+	app.action(constants.salesforceLoginAction, appLoginAction);
+
 	// sequelize.sync();
 	sequelize
 		.authenticate()
